@@ -1,0 +1,16 @@
+version: '2' 
+services:
+  web:
+    image: my_anaconda3 # before excecute: ``sudo docker build -t my_anaconda3 ./Dockerfiles/anaconda3/``
+    env_file: .env
+    volumes:
+      - ./:/jupyter-docker
+    command: bash -c "/opt/conda/bin/jupyter notebook 
+                      --notebook-dir=jupyter-docker/notebooks 
+                      --ip='*' 
+                      --port=8888 
+                      --no-browser 
+                      --NotebookApp.token=portal 
+                      --allow-root" 
+    ports:
+      - 8888:8888
